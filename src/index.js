@@ -131,15 +131,31 @@ const showGameModal = (game) => {
 
 const renderReviews = (reviews) => {
     reviewH3 = document.querySelector('.reviews');
+    avgReview = getAverageReviewScore(reviews);
+
+    const p = document.createElement('p');
+    p.classList.add('review-p')
+    p.innerHTML = `Average Score: (${avgReview}/5)`
+    reviewH3.appendChild(p);
+
     const ul = document.createElement('ul');
     reviewH3.append(ul);
 
     reviews.forEach(review => renderReview(review, ul));
 }
 
+const getAverageReviewScore = (reviews) => {
+    const reviewScores = reviews.map(review => review.score);
+    const averageReview = reviewScores.reduce(function(a, b) {
+        return a + b;
+    }, 0)
+
+    return averageReview / reviews.length;
+}
+
 const renderReview = (review, ul) => {
     const li = document.createElement('li')
-    li.innerHTML = `Score: ${review.score}<br />Summary: ${review.summary}`
+    li.innerHTML = `${review.user_name} (${review.score}/5)<br />Summary: ${review.summary}`
     li.classList.add('review-li');
     ul.appendChild(li);
 }

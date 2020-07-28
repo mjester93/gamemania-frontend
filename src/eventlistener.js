@@ -12,6 +12,12 @@ const addEventListener = () => {
 
 const addGameEventListener = (li, game) => {
     li.addEventListener('click', (event) => {
-        showGameModal(game);
+        if (event.target.nodeName !== 'BUTTON') {
+            showGameModal(game);
+        } else if (event.target.innerText === 'Add to Collection') {
+            console.log('Add to collection');
+        } else if (event.target.innerText === 'Add to Wishlist') {
+            console.log('Add to Wishlist');
+        }
     })
 }
