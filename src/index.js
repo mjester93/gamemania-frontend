@@ -54,9 +54,28 @@ const createPlatformH1 = (platform) => {
 
 const createPlatformUl = () => {
     const container = document.querySelector('.container');
-    const ul = document.createElement('ul');
-    ul.id = 'games-list';
-    container.append(ul);
+    // const ul = document.createElement('ul');
+    // ul.id = 'games-list';
+    const table = document.createElement('table');
+    table.id = 'games-table'
+
+    const thead = document.createElement('thead');
+    table.append(thead);
+
+    const tr = document.createElement('tr');
+    thead.append(tr);
+
+    const nameTh = document.createElement('th');
+    tr.append(nameTh);
+
+    const buttonsTh = document.createElement('th');
+    tr.append(buttonsTh);
+
+    const tbody = document.createElement('tbody');
+    tbody.id = 'games-table-tbody'
+    table.append(tbody);
+
+    container.append(table);
 }
 
 const renderGames = (platform) => {
@@ -64,35 +83,21 @@ const renderGames = (platform) => {
 }
 
 const renderGame = (game) => {
-    // Get the ul
-    ul = document.querySelector('#games-list');
+    const tbody = document.querySelector('#games-table-tbody');
 
-    // print a list of all the games
-    li = document.createElement('li');
-    li.dataset.gameId = game.id;
-    li.innerText = game.name;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td data-id=${game.id}>${game.name}</td>
+        <td>
+            <div class="buttons has-addons collection-wishlist-buttons">
+                <button class="button is-small">Add to Collection</button>
+                <button class="button is-small">Add to Wishlist</button>
+            </div>
+        </td>
+    `
+    tbody.append(tr);
 
-    const divButtons = document.createElement('div');
-    divButtons.classList.add('buttons');
-    divButtons.classList.add('has-addons');
-    divButtons.classList.add('collection-wishlist-buttons')
-    li.appendChild(divButtons);
-
-    const collectionButton = document.createElement('button');
-    collectionButton.classList.add('button');
-    collectionButton.classList.add('is-small');
-    collectionButton.innerText = 'Add to Collection';
-    divButtons.append(collectionButton);
-
-    const wishlistButton = document.createElement('button');
-    wishlistButton.classList.add('button');
-    wishlistButton.classList.add('is-small');
-    wishlistButton.innerText = 'Add to Wishlist';
-    divButtons.append(wishlistButton);
-
-    ul.append(li);
-
-    addGameEventListener(li, game);
+    addGameEventListener(tr, game);
 }
 
 const showGameModal = (game) => {
@@ -149,7 +154,6 @@ const getAverageReviewScore = (reviews) => {
     const averageReview = reviewScores.reduce(function(a, b) {
         return a + b;
     }, 0)
-
     return averageReview / reviews.length;
 }
 

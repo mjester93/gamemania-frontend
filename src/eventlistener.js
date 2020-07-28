@@ -10,8 +10,8 @@ const addEventListener = () => {
     })
 }
 
-const addGameEventListener = (li, game) => {
-    li.addEventListener('click', (event) => {
+const addGameEventListener = (tr, game) => {
+    tr.addEventListener('click', (event) => {
         if (event.target.nodeName !== 'BUTTON') {
             showGameModal(game);
         } else if (event.target.innerText === 'Add to Collection') {
