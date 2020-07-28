@@ -4,6 +4,8 @@ const addEventListener = () => {
             platformId = event.target.dataset.platformId;
             clearContainer();
             renderGamesForPlatform(platformId);
+        } else if (event.target.classList.contains('game-modal-close')) {
+            clearModal();
         }
     })
 }
