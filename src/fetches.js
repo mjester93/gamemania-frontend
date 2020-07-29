@@ -1,6 +1,7 @@
 BASE_URL = 'http://localhost:3000/api/v1/'
 PLATFORMS_URL = BASE_URL + 'platforms/'
 GAMES_URL = BASE_URL + 'games/'
+USERS_URL = BASE_URL + 'users/'
 
 const fetchAllPlatforms = () => {
     fetch(PLATFORMS_URL)
@@ -18,4 +19,22 @@ const fetchReviews = (gameId) => {
     fetch(`${GAMES_URL}${gameId}`)
     .then(response => response.json())
     .then(game => renderReviews(game['ordered_reviews']))
+}
+
+const fetchCreateUser = (name) => {
+    const options = {
+        'method': 'POST',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            name: name
+        })
+    }
+
+    fetch(USERS_URL, options)
+    .then(console.log)
+    .then(console.log)
+    .catch(error => alert(error))
 }

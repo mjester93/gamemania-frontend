@@ -15,15 +15,27 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
-                <strong>My Profile</strong>
-              </a>
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-primary">
-                <strong>Log in</strong>
-              </a>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">My Profile</a>
+                <div class="navbar-dropdown">
+                  <a class="navbar-item">My Games</a>
+                  <hr class="navbar-divider">
+                  <a class="navbar-item">Wishlist</a>
+                  <hr class="navbar-divider">
+                  <a class="navbar-item">Reviews</a>
+                </div>
+              </div>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" style="width: 250px">Log in</a>
+                <div class="navbar-dropdown">
+                  <a class="navbar-item">Username:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="fname" name="fname"></a>
+                  <a class="navbar-item">Sign In</a>
+                  <hr class="navbar-divider">
+                  <a class="navbar-item" id="sign-up">Sign Up</a>
+                  <hr class="navbar-divider">
+                  <a class="navbar-item">Logout</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

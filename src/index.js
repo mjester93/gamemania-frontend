@@ -1,5 +1,7 @@
+let container;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
+    container = document.querySelector('.container');
     init();
 })
 
@@ -9,7 +11,6 @@ function init() {
 }
 
 const clearContainer = () => {
-    const container = document.querySelector('.container');
     container.innerHTML = '';
 }
 
@@ -44,7 +45,6 @@ const renderGamesForPlatform = (platformId) => {
 }
 
 const createPlatformH1 = (platform) => {
-    const container = document.querySelector('.container');
     const h1 = document.createElement('h1');
     h1.classList.add('title');
     h1.classList.add('is-1');
@@ -53,7 +53,6 @@ const createPlatformH1 = (platform) => {
 }
 
 const createPlatformUl = () => {
-    const container = document.querySelector('.container');
     // const ul = document.createElement('ul');
     // ul.id = 'games-list';
     const table = document.createElement('table');
@@ -164,7 +163,36 @@ const renderReview = (review, ul) => {
     ul.appendChild(li);
 }
 
+const renderSignUp = () => {
+    const h1 = document.createElement('h1');
+    h1.classList.add('title');
+    h1.classList.add('is-1');
+    h1.innerText = `Sign Up`
+    container.appendChild(h1);
+
+    renderForm();
+}
+
+const renderForm = () => {
+    const form = document.createElement('form');
+    form.innerHTML = `
+        <form class="field">
+            <label class="label">Name</label>
+            <input class="input" type="text" id="sign-up-name" placeholder="Name">
+            <input type="submit" id="sign-up-submit" class="button is-primary">
+        </form>
+    `
+    container.append(form);
+} 
+
 const clearModal = () => {
     const modal = document.querySelector('#game-modal');
     modal.classList.remove('is-active');
+}
+
+const createUser = (name) => {
+    fetchCreateUser(name);
+}
+
+const LogUserIn = (user) => {
 }

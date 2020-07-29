@@ -6,6 +6,14 @@ const addEventListener = () => {
             renderGamesForPlatform(platformId);
         } else if (event.target.classList.contains('game-modal-close')) {
             clearModal();
+        } else if (event.target.id === 'sign-up') {
+            clearContainer();
+            renderSignUp();
+        } else if (event.target.id === 'sign-up-submit') {
+            event.preventDefault();
+            name = document.getElementById('sign-up-name').value;
+
+            createUser(name);
         }
     })
 }
