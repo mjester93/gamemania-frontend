@@ -22,7 +22,12 @@ const addEventListener = () => {
         // GAME MODALS
         else if (event.target.classList.contains('game-modal-close')) {
             clearModal(); 
-        } 
+        } else if (event.target.id === 'submit-review-button') {
+            const score = parseFloat(document.getElementById('review-score').value, 10);
+            const summary = document.getElementById('review-summary').value;
+
+            console.log(score, summary);
+        }
 
 
 
@@ -31,6 +36,31 @@ const addEventListener = () => {
             platformId = event.target.dataset.platformId;
             clearContainer();
             renderGamesForPlatform(platformId);
+        } 
+        
+
+        
+        /// MY PROFILE LINKS
+        else if (event.target.id === 'my-games') {
+            clearContainer();
+            renderUserGames();
+        } else if (event.target.id === 'my-wishlist') {
+            clearContainer();
+            renderUserWishlists();
+        } else if (event.target.id === 'my-reviews') {
+            clearContainer();
+            renderUserReviews();
+        }
+
+
+
+
+        // DELETE BUTTONS
+        else if (event.target.classList.contains('delete-from-collection-button')) {
+            gameId = event.target.dataset.gameId;
+            fetchDeleteUserGame(gameId);
+            deleteUserGameRow(event.target);
+            alertUserOfDeletedGame();
         }
     })
 }
@@ -40,9 +70,11 @@ const addGameEventListener = (tr, game) => {
         if (event.target.nodeName !== 'BUTTON') {
             showGameModal(game);
         } else if (event.target.innerText === 'Add to Collection') {
-            console.log('Add to collection');
+            const gameId = event.target.dataset.gameId;
+            fetchPostUserGame(gameId);
         } else if (event.target.innerText === 'Add to Wishlist') {
-            console.log('Add to Wishlist');
+            const gameId = event.target.dataset.gameId;
+            fetchPostUserWishlists(gameId);
         }
     })
 }

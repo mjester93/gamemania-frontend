@@ -3,6 +3,9 @@ PLATFORMS_URL = BASE_URL + 'platforms/';
 GAMES_URL = BASE_URL + 'games/';
 USERS_URL = BASE_URL + 'users/';
 FIND_USER_URL = BASE_URL + 'users/find_user/'
+USER_GAMES_URL = BASE_URL + 'user_games/'
+USER_GAMES_DELETE_URL = BASE_URL + 'users/delete_game/'
+USER_WISHLISTS_URL = BASE_URL + 'user_wishlists/'
 
 const fetchAllPlatforms = () => {
     fetch(PLATFORMS_URL)
@@ -56,5 +59,63 @@ const fetchUser = (name) => {
             LogUserIn(user);
         }
     })
+    .catch(error => alert(error))
+}
+
+const fetchPostUserGame = (gameId) => {
+    const options = {
+        'method': 'POST',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'game_id': gameId,
+            'user_id': userId
+        })
+    }
+
+    fetch(USER_GAMES_URL, options)
+    .then(response => response.json())
+    .then(userGame => pushGameIntoUserArray(userGames, userGame, "collection"))
+    .catch(error => alert(error))
+}
+
+const fetchPostUserWishlists = (gameId) => {
+    const options = {
+        'method': 'POST',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'game_id': gameId,
+            'user_id': userId
+        })
+    }
+
+    fetch(USER_WISHLISTS_URL, options)
+    .then(response => response.json())
+    .then(userWishlist => pushGameIntoUserArray(userWishlists, userWishlist, "wishlist"))
+    .catch(error => alert(error))
+}
+
+const fetchDeleteUserGame = (gameId) => {
+    const options = {
+        'method': 'DELETE',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'game_id': gameId,
+            'user_id': userId
+        })
+    }
+
+    
+    fetch(`${USER_GAMES_DELETE_URL}${userId}`, options)
+    .then(response => response.json())
+    .then(game => removeGameFromUserGame(game))
     .catch(error => alert(error))
 }

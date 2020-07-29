@@ -1,5 +1,9 @@
 let container;
+let userName;
 let userId;
+let userGames;
+let userWishlists;
+let userReviews;
 
 document.addEventListener('DOMContentLoaded', () => {
     container = document.querySelector('.container');
@@ -79,19 +83,19 @@ const createPlatformUl = () => {
 }
 
 const renderGames = (platform) => {
-    platform['ordered_games'].forEach(game => renderGame(game));
+    const tbody = document.querySelector('#games-table-tbody');
+    platform['ordered_games'].forEach(game => renderGame(game, tbody));
 }
 
-const renderGame = (game) => {
-    const tbody = document.querySelector('#games-table-tbody');
+const renderGame = (game, tbody) => {
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
         <td data-id=${game.id}>${game.name}</td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small">Add to Collection</button>
-                <button class="button is-small">Add to Wishlist</button>
+                <button class="button is-small add-collection-button" data-game-id=${game.id}>Add to Collection</button>
+                <button class="button is-small add-wishlist-button" data-game-id=${game.id}>Add to Wishlist</button>
             </div>
         </td>
     `
@@ -128,6 +132,20 @@ const showGameModal = (game) => {
     </div>
     <div class="reviews">
         <h3 class="title is-3">Reviews</h3>
+    </div>
+    <div class="add-reviews">
+        <h3 class="title is-3">Add Review</h3>
+        <label class="label">Score</label>
+        <div class="control">
+            <input class="input" type="text" id="review-score" placeholder="Score between 1 (low) and 5 (this game is dope AF)">
+        </div>
+        <label class="label">Summary</label>
+        <div class="control">
+            <textarea class="textarea" id="review-summary" placeholder="Summary"></textarea>
+        </div>
+        <div class="control">
+            <button class="button is-primary" id="submit-review-button">Submit Review</button>
+        </div>
     </div>
     `
 
@@ -198,6 +216,10 @@ const createUser = (name) => {
 const LogUserIn = (user) => {
     clearContainer();
     userId = user.id;
+    userName = user.name;
+    userGames = user['owned_games'];
+    userWishlists = user['wishlist_games'];
+    userReviews = user['reviews'];
 
     const h1 = document.createElement('h1');
     h1.classList.add('title');
@@ -211,4 +233,98 @@ const logUserOut = () => {
     clearContainer();
     userId = null;
 
+}
+
+const renderUserGames = () => {
+    const h1 = document.createElement('h1');
+    h1.classList.add('title');
+    h1.classList.add('is-1');
+    h1.innerText = `${userName}'s Games!`;
+    container.append(h1);
+
+    const table = document.createElement('table');
+    table.id = 'my-games-table'
+    container.append(table);
+
+    const tbody = document.createElement('tbody');
+    tbody.id = 'my-games-table-tbody'
+    table.append(tbody);
+    userGames.forEach(game => renderUserGame(game, tbody))
+}
+
+const renderUserGame = (game, tbody) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td data-game-id="${game.id}">${game.name}</td>
+        <td>
+            <div class="buttons has-addons collection-wishlist-buttons">
+                <button class="button is-small delete-from-collection-button" data-game-id="${game.id}">Delete From Collection</button>
+            </div>
+        </td>
+    `   
+    tbody.append(tr);
+}
+
+const renderUserWishlists = () => {
+    const h1 = document.createElement('h1');
+    h1.classList.add('title');
+    h1.classList.add('is-1');
+    h1.innerText = `${userName}'s Wishlist!`;
+    container.append(h1);
+
+    const table = document.createElement('table');
+    table.id = 'my-wishlist-table'
+    container.append(table);
+
+    const tbody = document.createElement('tbody');
+    tbody.id = 'my-wishlist-table-tbody'
+    table.append(tbody);
+    userWishlists.forEach(game => renderWishlistGame(game, tbody))
+}
+
+const renderWishlistGame = (game, tbody) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td data-id=${game.id}>${game.name}</td>
+        <td>
+            <div class="buttons has-addons collection-wishlist-buttons">
+                <button class="button is-small">Delete From Wishlist</button>
+            </div>
+        </td>
+    `   
+    tbody.append(tr);
+}
+
+const pushGameIntoUserArray = (array, game, message) => {
+    alert(`${game['game']['name']} added to ${message}!`)
+    array.push({id: game['game']['id'], name: game['game']['name']})
+}
+
+const removeGameFromUserGame = (game) => {
+    userGames = userGames.filter(userGame => userGame.id !== game[0].id);
+}
+
+const deleteUserGameRow = (button) => {
+    button.parentNode.parentNode.parentNode.remove();
+}
+
+const alertUserOfDeletedGame = () => {
+    alert('Game is deleted!');
+}
+
+const renderUserReviews = () => {
+    const h1 = document.createElement('h1');
+    h1.classList.add('title');
+    h1.classList.add('is-1');
+    h1.innerText = `${userName}'s Reviews!`;
+    container.append(h1);
+
+    const table = document.createElement('table');
+    table.id = 'my-reviews-table'
+    container.append(table);
+
+    const tbody = document.createElement('tbody');
+    tbody.id = 'my-reviews-table-tbody'
+    table.append(tbody);
+    userReviews.forEach(review => renderWishlistGame(review, tbody))
 }
