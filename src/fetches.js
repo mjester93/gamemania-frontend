@@ -34,7 +34,7 @@ const fetchCreateUser = (name) => {
     }
 
     fetch(USERS_URL, options)
-    .then(console.log)
+    .then(response => response.json())
     .then(console.log)
     .catch(error => alert(error))
 }
