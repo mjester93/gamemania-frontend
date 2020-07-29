@@ -35,6 +35,12 @@ const fetchCreateUser = (name) => {
 
     fetch(USERS_URL, options)
     .then(response => response.json())
-    .then(console.log)
+    .then(user => {
+        if (user.id > 0) {
+            LogUserIn(user);
+        } else {
+            alert('Username already exists!');
+        }
+    })
     .catch(error => alert(error))
 }

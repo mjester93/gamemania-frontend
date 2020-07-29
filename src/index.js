@@ -1,4 +1,5 @@
 let container;
+let userId;
 
 document.addEventListener('DOMContentLoaded', () => {
     container = document.querySelector('.container');
@@ -195,4 +196,19 @@ const createUser = (name) => {
 }
 
 const LogUserIn = (user) => {
+    clearContainer();
+    userId = user.id;
+
+    const h1 = document.createElement('h1');
+    h1.classList.add('title');
+    h1.classList.add('is-1');
+    h1.innerText = `Welcome, ${user.name}!`;
+
+    container.append(h1);
+}
+
+const logUserOut = () => {
+    clearContainer();
+    userId = null;
+
 }
