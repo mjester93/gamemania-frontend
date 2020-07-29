@@ -7,8 +7,9 @@ const addEventListener = () => {
             renderSignUp();
         } else if (event.target.id === 'log-out') {
             logUserOut();
-        } else if (event.target.id === 'log-in') {
-
+        } else if (event.target.id === 'sign-in') {
+            const name = document.getElementById('fname').value;
+            fetchUser(name);
         } else if (event.target.id === 'sign-up-submit') {
             event.preventDefault();
             name = document.getElementById('sign-up-name').value;
@@ -18,11 +19,11 @@ const addEventListener = () => {
 
 
 
-
         // GAME MODALS
         else if (event.target.classList.contains('game-modal-close')) {
             clearModal(); 
         } 
+
 
 
         // PLATFORM HEADERS

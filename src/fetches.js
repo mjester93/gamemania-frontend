@@ -1,7 +1,8 @@
-BASE_URL = 'http://localhost:3000/api/v1/'
-PLATFORMS_URL = BASE_URL + 'platforms/'
-GAMES_URL = BASE_URL + 'games/'
-USERS_URL = BASE_URL + 'users/'
+BASE_URL = 'http://localhost:3000/api/v1/';
+PLATFORMS_URL = BASE_URL + 'platforms/';
+GAMES_URL = BASE_URL + 'games/';
+USERS_URL = BASE_URL + 'users/';
+FIND_USER_URL = BASE_URL + 'users/find_user/'
 
 const fetchAllPlatforms = () => {
     fetch(PLATFORMS_URL)
@@ -40,6 +41,19 @@ const fetchCreateUser = (name) => {
             LogUserIn(user);
         } else {
             alert('Username already exists!');
+        }
+    })
+    .catch(error => alert(error))
+}
+
+const fetchUser = (name) => {
+    fetch(`${FIND_USER_URL}${name}`)
+    .then(response => response.json())
+    .then(user => {
+        if (user === null) {
+            alert('Incorrect login information!');
+        } else {
+            LogUserIn(user);
         }
     })
     .catch(error => alert(error))
