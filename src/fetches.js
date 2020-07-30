@@ -2,10 +2,11 @@ BASE_URL = 'http://localhost:3000/api/v1/';
 PLATFORMS_URL = BASE_URL + 'platforms/';
 GAMES_URL = BASE_URL + 'games/';
 USERS_URL = BASE_URL + 'users/';
-FIND_USER_URL = BASE_URL + 'users/find_user/'
-USER_GAMES_URL = BASE_URL + 'user_games/'
-USER_GAMES_DELETE_URL = BASE_URL + 'users/delete_game/'
-USER_WISHLISTS_URL = BASE_URL + 'user_wishlists/'
+FIND_USER_URL = BASE_URL + 'users/find_user/';
+USER_GAMES_URL = BASE_URL + 'user_games/';
+USER_GAMES_DELETE_URL = BASE_URL + 'users/delete_game/';
+USER_WISHLISTS_URL = BASE_URL + 'user_wishlists/';
+USER_WISHLISTS_DELETE_URL = BASE_URL + 'users/delete_wishlist/';
 REVIEW_URL = BASE_URL + 'reviews/'
 
 const fetchAllPlatforms = () => {
@@ -156,4 +157,24 @@ const fetchDeleteReview = (reviewId) => {
     fetch(`${REVIEW_URL}${reviewId}`, options)
     .then(response => response.json())
     .then(review => removeReviewFromUserReviews(review))
+}
+
+const fetchDeleteUserWishlist = (gameId) => {
+    const options = {
+        'method': 'DELETE',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'game_id': gameId,
+            'user_id': userId
+        })
+    }
+
+
+    fetch(`${USER_WISHLISTS_DELETE_URL}${userId}`, options)
+    .then(response => response.json())
+    .then(game => removeGameFromUserWishlist(game))
+    .catch(error => alert(error))
 }

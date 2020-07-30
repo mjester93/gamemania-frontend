@@ -289,7 +289,7 @@ const renderWishlistGame = (game, tbody) => {
         <td data-id=${game.id}>${game.name}</td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-warning is-small">Delete From Wishlist</button>
+                <button class="button is-warning is-small delete-from-wishlist-button" data-game-id="${game.id}">Delete From Wishlist</button>
             </div>
         </td>
     `   
@@ -302,15 +302,27 @@ const pushGameIntoUserArray = (array, game, message) => {
 }
 
 const removeGameFromUserGame = (game) => {
-    userGames = userGames.filter(userGame => userGame.id !== game[0].id);
+    userGames = userGames.filter(userGame => userGame.id !== game.id);
+}
+
+const removeGameFromUserWishlist = (game) => {
+    userWishlists = userWishlists.filter(userWishlist => userWishlist.id !== game.id)
 }
 
 const deleteUserGameRow = (button) => {
     button.parentNode.parentNode.parentNode.remove();
 }
 
+const deleteUserWishlistRow = (button) => {
+    button.parentNode.parentNode.parentNode.remove();
+}
+
 const alertUserOfDeletedGame = () => {
     alert('Game is deleted!');
+}
+
+const alertUserOfDeletedWishlist = () => {
+    alert('Game is deleted from wishlist!')
 }
 
 const renderUserReviews = () => {

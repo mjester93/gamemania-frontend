@@ -67,6 +67,11 @@ const addEventListener = () => {
             fetchDeleteReview(reviewId);
             deleteUserReviewRow(event.target);
             alertUserOfDeletedReview();
+        } else if (event.target.classList.contains('delete-from-wishlist-button')) {
+            gameId = event.target.dataset.gameId;
+            fetchDeleteUserWishlist(gameId);
+            deleteUserWishlistRow(event.target);
+            alertUserOfDeletedWishlist();
         }
     })
 }
