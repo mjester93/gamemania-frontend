@@ -339,7 +339,7 @@ const renderUserReview = (review, tbody) => {
         </td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small delete-review">Delete Review</button>
+                <button class="button is-small delete-review" data-id=${review.id}>Delete Review</button>
             </div>
         </td>
     `   
@@ -367,4 +367,16 @@ const pushReviewIntoReviewArray = (review) => {
 
     const ul = document.getElementById('review-ul');
     renderReview(review, ul, userName);
+}
+
+const removeReviewFromUserReviews = (review) => {
+    userReviews = userReviews.filter(userReview => userReview.id !== review.id);
+}
+
+const deleteUserReviewRow = (button) => {
+    button.parentNode.parentNode.parentNode.remove();
+}
+
+const alertUserOfDeletedReview = () => {
+    alert('Review is deleted!');
 }

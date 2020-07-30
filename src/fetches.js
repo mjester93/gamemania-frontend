@@ -140,3 +140,20 @@ const fetchPostUserReview = (score, summary, gameId) => {
     .then(review => pushReviewIntoReviewArray(review))
     .catch(error => alert(error))
 }
+
+const fetchDeleteReview = (reviewId) => {
+    const options = {
+        'method': 'DELETE',
+        'headers' : {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'review_id': reviewId
+        })
+    }
+
+    fetch(`${REVIEW_URL}${reviewId}`, options)
+    .then(response => response.json())
+    .then(review => removeReviewFromUserReviews(review))
+}

@@ -62,6 +62,11 @@ const addEventListener = () => {
             fetchDeleteUserGame(gameId);
             deleteUserGameRow(event.target);
             alertUserOfDeletedGame();
+        } else if (event.target.classList.contains('delete-review')) {
+            reviewId = event.target.dataset.id;
+            fetchDeleteReview(reviewId);
+            deleteUserReviewRow(event.target);
+            alertUserOfDeletedReview();
         }
     })
 }
