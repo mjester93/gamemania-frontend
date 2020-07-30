@@ -22,3 +22,7 @@ h1.title {
 table {
     color:white;
 }
+
+#login-dropdown:last-child {
+    left: -200px;
+  }
