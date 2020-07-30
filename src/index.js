@@ -144,7 +144,7 @@ const showGameModal = (game) => {
             <textarea class="textarea" id="review-summary" placeholder="Summary"></textarea>
         </div>
         <div class="control">
-            <button class="button is-primary" id="submit-review-button" data-game-id="${game.id}">Submit Review</button>
+            <button class="button is-warning" id="submit-review-button" data-game-id="${game.id}">Submit Review</button>
         </div>
     </div>
     `
