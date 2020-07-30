@@ -199,7 +199,7 @@ const renderForm = () => {
         <form class="field">
             <label class="label">Name</label>
             <input class="input" type="text" id="sign-up-name" placeholder="Name">
-            <input type="submit" id="sign-up-submit" class="button is-primary">
+            <input type="submit" id="sign-up-submit" class="button is-warning">
         </form>
     `
     container.append(form);
@@ -392,3 +392,4 @@ const deleteUserReviewRow = (button) => {
 const alertUserOfDeletedReview = () => {
     alert('Review is deleted!');
 }
+
