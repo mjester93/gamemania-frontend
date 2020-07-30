@@ -25,8 +25,9 @@ const addEventListener = () => {
         } else if (event.target.id === 'submit-review-button') {
             const score = parseFloat(document.getElementById('review-score').value, 10);
             const summary = document.getElementById('review-summary').value;
-
-            console.log(score, summary);
+            const gameId = parseInt(event.target.dataset.gameId, 10);
+            
+            fetchPostUserReview(score, summary, gameId);
         }
 
 

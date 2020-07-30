@@ -6,6 +6,7 @@ FIND_USER_URL = BASE_URL + 'users/find_user/'
 USER_GAMES_URL = BASE_URL + 'user_games/'
 USER_GAMES_DELETE_URL = BASE_URL + 'users/delete_game/'
 USER_WISHLISTS_URL = BASE_URL + 'user_wishlists/'
+REVIEW_URL = BASE_URL + 'reviews/'
 
 const fetchAllPlatforms = () => {
     fetch(PLATFORMS_URL)
@@ -113,9 +114,29 @@ const fetchDeleteUserGame = (gameId) => {
         })
     }
 
-    
+
     fetch(`${USER_GAMES_DELETE_URL}${userId}`, options)
     .then(response => response.json())
     .then(game => removeGameFromUserGame(game))
+    .catch(error => alert(error))
+}
+
+const fetchPostUserReview = (score, summary, gameId) => {
+    const options = {
+        'method': 'POST',
+        'headers': {
+            'accept': 'application/json',
+            'content-type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'game_id': gameId,
+            'user_id': userId,
+            'score': score,
+            'summary': summary
+        })
+    }
+    fetch(REVIEW_URL, options)
+    .then(response => response.json())
+    .then(review => pushReviewIntoReviewArray(review))
     .catch(error => alert(error))
 }

@@ -144,7 +144,7 @@ const showGameModal = (game) => {
             <textarea class="textarea" id="review-summary" placeholder="Summary"></textarea>
         </div>
         <div class="control">
-            <button class="button is-primary" id="submit-review-button">Submit Review</button>
+            <button class="button is-primary" id="submit-review-button" data-game-id="${game.id}">Submit Review</button>
         </div>
     </div>
     `
@@ -158,10 +158,11 @@ const renderReviews = (reviews) => {
 
     const p = document.createElement('p');
     p.classList.add('review-p')
-    p.innerHTML = `Average Score: (${avgReview}/5)`
+    p.innerHTML = `Average Score: (${avgReview.toFixed(1)}/5)`
     reviewH3.appendChild(p);
 
     const ul = document.createElement('ul');
+    ul.id = 'review-ul';
     reviewH3.append(ul);
 
     reviews.forEach(review => renderReview(review, ul));
@@ -175,9 +176,9 @@ const getAverageReviewScore = (reviews) => {
     return averageReview / reviews.length;
 }
 
-const renderReview = (review, ul) => {
+const renderReview = (review, ul, reviewUserName = review.user_name) => {
     const li = document.createElement('li')
-    li.innerHTML = `${review.user_name} (${review.score}/5)<br />Summary: ${review.summary}`
+    li.innerHTML = `${reviewUserName} (${review.score}/5)<br />Summary: ${review.summary}`
     li.classList.add('review-li');
     ul.appendChild(li);
 }
@@ -326,5 +327,44 @@ const renderUserReviews = () => {
     const tbody = document.createElement('tbody');
     tbody.id = 'my-reviews-table-tbody'
     table.append(tbody);
-    userReviews.forEach(review => renderWishlistGame(review, tbody))
+    userReviews.forEach(review => renderUserReview(review, tbody))
+}
+
+const renderUserReview = (review, tbody) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td data-id=${review.id}>${review.game.name} (${review.score}/5)
+            <br />
+            <p class="review-p">${review.summary}</p>
+        </td>
+        <td>
+            <div class="buttons has-addons collection-wishlist-buttons">
+                <button class="button is-small delete-review">Delete Review</button>
+            </div>
+        </td>
+    `   
+    tbody.append(tr);
+}
+
+const pushReviewIntoReviewArray = (review) => {
+    alert(`Review added!`)
+    userReviews.push({
+        id: review['id'], 
+        score: review['score'], 
+        summary: review['summary'],
+        game: {
+            created_at: review['game']['created_at'],
+            first_release_date: review['game']['first_release_date'],
+            genre: review['game']['genre'],
+            id: review['game']['id'],
+            name: review['game']['name'],
+            platform_id: review['game']['platform_id'],
+            storyline: review['game']['storyline'],
+            summary: review['game']['summary'],
+            updated_at: review['game']['updated_at']
+        }
+    })
+
+    const ul = document.getElementById('review-ul');
+    renderReview(review, ul, userName);
 }
