@@ -1,7 +1,24 @@
+body {
+    background-image: url("./images/game-on.jpg");
+    background-position: center;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+}
+
 div.collection-wishlist-buttons {
     display: inline;
 }
 
 li.review-li, p.review-p {
     padding-bottom: 20px;
+}
+
+h1.title {
+    color: white;
+}
+
+table {
+    color:white;
 }

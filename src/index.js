@@ -94,8 +94,8 @@ const renderGame = (game, tbody) => {
         <td data-id=${game.id}>${game.name}</td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small add-collection-button" data-game-id=${game.id}>Add to Collection</button>
-                <button class="button is-small add-wishlist-button" data-game-id=${game.id}>Add to Wishlist</button>
+                <button class="button is-warning is-small add-collection-button" data-game-id=${game.id}>Add to Collection</button>
+                <button class="button is-warning is-small add-wishlist-button" data-game-id=${game.id}>Add to Wishlist</button>
             </div>
         </td>
     `
@@ -259,7 +259,7 @@ const renderUserGame = (game, tbody) => {
         <td data-game-id="${game.id}">${game.name}</td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small delete-from-collection-button" data-game-id="${game.id}">Delete From Collection</button>
+                <button class="button is-warning is-small delete-from-collection-button" data-game-id="${game.id}">Delete From Collection</button>
             </div>
         </td>
     `   
@@ -289,7 +289,7 @@ const renderWishlistGame = (game, tbody) => {
         <td data-id=${game.id}>${game.name}</td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small">Delete From Wishlist</button>
+                <button class="button is-warning is-small">Delete From Wishlist</button>
             </div>
         </td>
     `   
@@ -339,7 +339,7 @@ const renderUserReview = (review, tbody) => {
         </td>
         <td>
             <div class="buttons has-addons collection-wishlist-buttons">
-                <button class="button is-small delete-review" data-id=${review.id}>Delete Review</button>
+                <button class="button is-small is-warning delete-review" data-id=${review.id}>Delete Review</button>
             </div>
         </td>
     `   
