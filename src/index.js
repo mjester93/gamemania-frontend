@@ -229,14 +229,17 @@ const LogUserIn = (user) => {
     container.append(h1);
 
     const gamesP = document.createElement('p');
+    gamesP.classList.add('welcome-text');
     gamesP.innerText = `You have ${userGames.length} games in your collection.`
     container.append(gamesP);
 
     const wishlistsP = document.createElement('p');
+    wishlistsP.classList.add('welcome-text');
     wishlistsP.innerText = `You have ${userWishlists.length} games in your wishlist.`
     container.append(wishlistsP);
 
     const reviewsP = document.createElement('p');
+    reviewsP.classList.add('welcome-text');
     reviewsP.innerText = `You wrote a total of ${userReviews.length} reviews.`
     container.append(reviewsP);
 }
@@ -355,6 +358,7 @@ const renderUserReviews = () => {
 
 const renderUserReview = (review, tbody) => {
     const tr = document.createElement('tr');
+    tr.setAttribute('width', '100px')
     tr.innerHTML = `
         <td data-id=${review.id}>${review.game.name} (${review.score}/5)
             <br />
