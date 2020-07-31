@@ -226,8 +226,19 @@ const LogUserIn = (user) => {
     h1.classList.add('title');
     h1.classList.add('is-1');
     h1.innerText = `Welcome, ${user.name}!`;
-
     container.append(h1);
+
+    const gamesP = document.createElement('p');
+    gamesP.innerText = `You have ${userGames.length} games in your collection.`
+    container.append(gamesP);
+
+    const wishlistsP = document.createElement('p');
+    wishlistsP.innerText = `You have ${userWishlists.length} games in your wishlist.`
+    container.append(wishlistsP);
+
+    const reviewsP = document.createElement('p');
+    reviewsP.innerText = `You wrote a total of ${userReviews.length} reviews.`
+    container.append(reviewsP);
 }
 
 const logUserOut = () => {
