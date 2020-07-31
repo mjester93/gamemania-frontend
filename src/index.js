@@ -362,10 +362,8 @@ const renderUserReview = (review, tbody) => {
     tr.innerHTML = `
         <td data-id=${review.id}>${review.game.name} (${review.score}/5)
             <br />
-            <p class="review-p">${review.summary}</p>
-        </td>
-        <td>
-            <div class="buttons has-addons collection-wishlist-buttons">
+            <p>${review.summary}</p>
+            <div class="buttons has-addons collection-wishlist-buttons review-p">
                 <button class="button is-small is-warning delete-review" data-id=${review.id}>Delete Review</button>
             </div>
         </td>
@@ -401,7 +399,7 @@ const removeReviewFromUserReviews = (review) => {
 }
 
 const deleteUserReviewRow = (button) => {
-    button.parentNode.parentNode.parentNode.remove();
+    button.parentNode.parentNode.remove();
 }
 
 const alertUserOfDeletedReview = () => {
