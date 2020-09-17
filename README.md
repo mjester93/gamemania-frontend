@@ -43,5 +43,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2020 [Michael Jester](https://github.com/TienPhanDev).<br />
+Copyright © 2020 [Michael Jester](https://github.com/mjester93).<br />
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
