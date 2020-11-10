@@ -42,11 +42,7 @@ const fetchCreateUser = (name) => {
     fetch(USERS_URL, options)
     .then(response => response.json())
     .then(user => {
-        if (user.id > 0) {
-            LogUserIn(user);
-        } else {
-            alert('Username already exists!');
-        }
+        user.id > 0 ? LogUserIn(user) : alert('Username already exists!');
     })
     .catch(error => alert(error))
 }
@@ -55,11 +51,7 @@ const fetchUser = (name) => {
     fetch(`${FIND_USER_URL}${name}`)
     .then(response => response.json())
     .then(user => {
-        if (user === null) {
-            alert('Incorrect login information!');
-        } else {
-            LogUserIn(user);
-        }
+        user === null ? alert('Incorrect login information!') : LogUserIn(user);
     })
     .catch(error => alert(error))
 }
